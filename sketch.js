@@ -1,34 +1,38 @@
-var ship, ship_sailing, edges;
-var seaImage;
+var ship, ship_runnin;
+var ground, invisibleGround, groundImage;
 
-function preload(){
-  ship_sailing = loadAnimation("ship-1.png","ship-2.png","ship-3.png","ship-4.png");
-  seaImage = loadImage("sea.png");
+function preload() {
+  ship_running = loadAnimation("ship-1.png", "ship-2.png", "ship-3.png", "ship-4.png");
+
+  groundImage = loadImage("sea.png")
 }
 
-function setup(){
-  createCanvas(600,200);
-  //creating ship
-  ship = createSprite(50,160,20,50);
-  ship.addAnimation("sailing",ship_sailing,);
-  edges = createEdgeSprites;
-  //adding scale and position to ship
-  ship.scale = 0.5
-  ship.x=50
+function setup() {
+createCanvas(1350, 600);
+  
+//create a ground sprite
+ground = createSprite(775,300,1200,600);
+ground.scale = 0.4;
+ground.addImage("ground",groundImage);
+ground.x = ground.width /2;
+ground.velocityX = -2;
+  
+
+//create a ship sprite
+ship = createSprite(100,300,20,50);
+ship.addAnimation("running", ship_running);
+ship.scale = 0.2;
+
+console.log(ship.y||ship.x)
 }
 
 function draw() {
-  //set background color
-  background("white");
-  //logging the y position of the ship
-  console.log(ship.y)
-  //jump when space key is pressed
-  if(keyDown("space")){
-    ship.velocityY = -10;
-    ship.velocityY = ship.velocityY + 0.5;
-  //stop trex from falling down
-    trex.collide(edges[3])
+background(220);
+
+if (ground.x < 505) {
+  ground.x = ground.width /2;
+}
+
+
 drawSprites();
-  }
- 
 }
